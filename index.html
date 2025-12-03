@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Hidden CSS Techniques</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; }
+        .techniques-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease;
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card h2 { margin-bottom: 1rem; color: #ffd700; }
+        .demo-box { 
+            height: 200px; 
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        pre {
+            background: rgba(0,0,0,0.3);
+            padding: 1rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+        }
+        .social-links {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+        .social-links a:hover { color: #ffd700; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-code"></i> 5 Hidden CSS Techniques</h1>
+            <p class="subtitle">Interactive demos of powerful CSS features you might not know</p>
+        </header>
+
+        <div class="techniques-grid">
+            
+            <!-- Technique 1: clip-path -->
+            <div class="card">
+                <h2><i class="fas fa-cut"></i> 1. clip-path Shapes</h2>
+                <p>Create complex shapes without SVG or extra divs</p>
+                <div class="demo-box">
+                    <div class="diamond"></div>
+                </div>
+                <pre><code>.diamond {
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+  clip-path: polygon(50% 0%, 100% 50%, 
+                    50% 100%, 0% 50%);
+}</code></pre>
+            </div>
+
+            <!-- Technique 2: aspect-ratio -->
+            <div class="card">
+                <h2><i class="fas fa-expand-alt"></i> 2. aspect-ratio</h2>
+                <p>Maintain perfect proportions responsively</p>
+                <div class="demo-box">
+                    <div class="video-placeholder">
+                        <div class="play-button">▶</div>
+                    </div>
+                </div>
+                <pre><code>.video-placeholder {
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  aspect-ratio: 16/9;
+  width: 100%;
+  border-radius: 10px;
+}</code></pre>
+            </div>
+
+            <!-- Technique 3: scroll-snap -->
+            <div class="card">
+                <h2><i class="fas fa-sliders-h"></i> 3. Scroll Snap</h2>
+                <p>Create app-like scrolling experiences</p>
+                <div class="demo-box">
+                    <div class="scroll-gallery">
+                        <div class="snap-item">1</div>
+                        <div class="snap-item">2</div>
+                        <div class="snap-item">3</div>
+                    </div>
+                </div>
+                <pre><code>.scroll-gallery {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+.snap-item {
+  scroll-snap-align: start;
+  flex: 0 0 80%;
+}</code></pre>
+            </div>
+
+            <!-- Technique 4: backdrop-filter -->
+            <div class="card">
+                <h2><i class="fas fa-glasses"></i> 4. Frosted Glass</h2>
+                <p>iOS-style glass morphism effects</p>
+                <div class="demo-box">
+                    <div class="frosted-card">
+                        <h3>Glass Card</h3>
+                        <p>See-through effect</p>
+                    </div>
+                </div>
+                <pre><code>.frosted-card {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+}</code></pre>
+            </div>
+
+            <!-- Technique 5: :is() & :where() -->
+            <div class="card">
+                <h2><i class="fas fa-broom"></i> 5. Cleaner Selectors</h2>
+                <p>DRYer, more readable CSS with :is() & :where()</p>
+                <div class="demo-box">
+                    <div class="selector-demo">
+                        <button class="btn">Button</button>
+                        <a href="#" class="btn">Link Button</a>
+                    </div>
+                </div>
+                <pre><code>/* Instead of this: */
+header p, footer p, section p { color: blue; }
+
+/* Write this: */
+:is(header, footer, section) p { color: blue; }</code></pre>
+            </div>
+        </div>
+
+        <div class="social-links">
+            <h3>Want the full code?</h3>
+            <p>Follow for more frontend gems!</p>
+            <div style="margin: 2rem 0;">
+                <a href="https://github.com/Hyoketsu-112" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://codepen.io/Hyoketsu-112" target="_blank"><i class="fab fa-codepen"></i></a>
+                <a href="https://instagram.com/the_dev_forge" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            <a href="https://github.com/Hyoketsu-112/css-techniques" 
+               style="background: white; color: #667eea; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 1rem;">
+               <i class="fas fa-download"></i> Get Full Source Code
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive effects
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 200);
+            });
+        });
+
+        // Scroll gallery interaction
+        const gallery = document.querySelector('.scroll-gallery');
+        if (gallery) {
+            let scrollPos = 0;
+            setInterval(() => {
+                scrollPos += 160;
+                if (scrollPos > 320) scrollPos = 0;
+                gallery.scrollTo({ left: scrollPos, behavior: 'smooth' });
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
